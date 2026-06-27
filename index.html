@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>업무 아이디어 접수함</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f3f7fb;
+      color: #172033;
+      font-family: Arial, "Malgun Gothic", sans-serif;
+    }
+
+    .wrap {
+      width: min(960px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 36px 0 64px;
+    }
+
+    .hero {
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #5e6a7d;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #dce4ee;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 8px 28px rgba(33, 54, 79, 0.07);
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 14px 0 7px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      width: 100%;
+      font: inherit;
+    }
+
+    input,
+    select,
+    textarea {
+      border: 1px solid #c9d4e1;
+      border-radius: 10px;
+      padding: 12px;
+      background: #ffffff;
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 13px 16px;
+      background: #0b5cab;
+      color: #ffffff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #074b8d;
+    }
+
+    button:disabled {
+      background: #a8b5c4;
+      cursor: not-allowed;
+    }
+
+    .sub-button {
+      width: auto;
+      padding: 9px 12px;
+      background: #eef4fb;
+      color: #174f85;
+      border: 1px solid #c9dcec;
+    }
+
+    .message {
+      min-height: 22px;
+      margin-top: 12px;
+      font-size: 14px;
+      color: #43617e;
+    }
+
+    .list-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .list-head h2 {
+      margin: 0;
+    }
+
+    .idea-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .idea {
+      border: 1px solid #dce4ee;
+      border-radius: 12px;
+      padding: 16px;
+      background: #fbfdff;
+    }
+
+    .idea-top {
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .idea-title {
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .badge {
+      flex: 0 0 auto;
+      border-radius: 20px;
+      padding: 5px 9px;
+      background: #e3f1ff;
+      color: #0b5cab;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .idea-content {
+      margin: 12px 0;
+      color: #46546a;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .idea-meta {
+      font-size: 12px;
+      color: #7a8798;
+    }
+
+    .empty {
+      padding: 30px 10px;
+      text-align: center;
+      color: #7a8798;
+    }
+
+    @media (max-width: 760px) {
+      .wrap {
+        width: min(100% - 24px, 960px);
+        padding-top: 24px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>업무 아이디어 접수함</h1>
+      <p>
+        업무개선, AI 활용, 홍보, 수산·어업 관련 아이디어를 간단히 등록하고 확인하는 샘플 프로그램
+      </p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>아이디어 등록</h2>
+
+        <form id="ideaForm">
+          <label for="title">제목</label>
+          <input
+            id="title"
+            name="title"
+            maxlength="80"
+            placeholder="예: 회의자료 자동 요약 기능"
+            required
+          >
+
+          <label for="category">분류</label>
+          <select id="category" name="category">
+            <option value="업무개선">업무개선</option>
+            <option value="AI">AI</option>
+            <option value="홍보">홍보</option>
+            <option value="수산·어업">수산·어업</option>
+            <option value="복지">복지</option>
+            <option value="기타">기타</option>
+          </select>
+
+          <label for="content">내용</label>
+          <textarea
+            id="content"
+            name="content"
+            maxlength="500"
+            placeholder="아이디어의 내용, 기대효과, 적용 대상 등을 작성해줘."
+            required
+          ></textarea>
+
+          <button id="submitButton" type="submit">아이디어 등록</button>
+          <div id="formMessage" class="message"></div>
+        </form>
+      </article>
+
+      <article class="card">
+        <div class="list-head">
+          <h2>최근 등록 아이디어</h2>
+          <button id="refreshButton" class="sub-button" type="button">
+            새로고침
+          </button>
+        </div>
+
+        <div id="ideaList" class="idea-list">
+          <div class="empty">목록을 불러오는 중이야.</div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    /*
+      아래 문자열을 본인의 Apps Script /exec 주소로 교체
+    */
+    const API_URL = 'https://script.google.com/macros/s/AKfycbySoLZNmxXqlwDd1vttjhxeob3TGG0FH33DF1ljs8GItRXUOIWOnsVD6xlJVzzh2U-1yQ/exec';
+
+    const form = document.getElementById('ideaForm');
+    const submitButton = document.getElementById('submitButton');
+    const refreshButton = document.getElementById('refreshButton');
+    const formMessage = document.getElementById('formMessage');
+    const ideaList = document.getElementById('ideaList');
+
+    function setMessage(message) {
+      formMessage.textContent = message;
+    }
+
+    function createTextElement(tagName, className, text) {
+      const element = document.createElement(tagName);
+      element.className = className;
+      element.textContent = text;
+      return element;
+    }
+
+    function renderIdeas(items) {
+      ideaList.innerHTML = '';
+
+      if (!items || items.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'empty';
+        empty.textContent = '아직 등록된 아이디어가 없어.';
+        ideaList.appendChild(empty);
+        return;
+      }
+
+      items.forEach(item => {
+        const article = document.createElement('article');
+        article.className = 'idea';
+
+        const top = document.createElement('div');
+        top.className = 'idea-top';
+
+        const title = createTextElement(
+          'div',
+          'idea-title',
+          item.title || '(제목 없음)'
+        );
+
+        const badge = createTextElement(
+          'span',
+          'badge',
+          item.category || '기타'
+        );
+
+        const content = createTextElement(
+          'div',
+          'idea-content',
+          item.content || ''
+        );
+
+        const meta = createTextElement(
+          'div',
+          'idea-meta',
+          `번호 ${item.id} · ${item.createdAt} · 상태: ${item.status}`
+        );
+
+        top.appendChild(title);
+        top.appendChild(badge);
+
+        article.appendChild(top);
+        article.appendChild(content);
+        article.appendChild(meta);
+
+        ideaList.appendChild(article);
+      });
+    }
+
+    function showLoadError() {
+      ideaList.innerHTML = '';
+      const error = document.createElement('div');
+      error.className = 'empty';
+      error.textContent =
+        '목록을 불러오지 못했어. Apps Script 주소와 배포 권한을 확인해줘.';
+      ideaList.appendChild(error);
+    }
+
+    function loadIdeas() {
+      if (!API_URL || API_URL.includes('여기에_')) {
+        showLoadError();
+        return;
+      }
+
+      ideaList.innerHTML =
+        '<div class="empty">목록을 불러오는 중이야.</div>';
+
+      const callbackName = `ideasCallback_${Date.now()}`;
+      const script = document.createElement('script');
+
+      const timeout = setTimeout(() => {
+        delete window[callbackName];
+        script.remove();
+        showLoadError();
+      }, 10000);
+
+      window[callbackName] = function (payload) {
+        clearTimeout(timeout);
+        delete window[callbackName];
+        script.remove();
+
+        if (!payload || !payload.ok) {
+          showLoadError();
+          return;
+        }
+
+        renderIdeas(payload.items || []);
+      };
+
+      script.onerror = function () {
+        clearTimeout(timeout);
+        delete window[callbackName];
+        script.remove();
+        showLoadError();
+      };
+
+      const separator = API_URL.includes('?') ? '&' : '?';
+
+      script.src =
+        `${API_URL}${separator}prefix=${encodeURIComponent(callbackName)}`;
+
+      document.head.appendChild(script);
+    }
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      if (!API_URL || API_URL.includes('여기에_')) {
+        setMessage('먼저 index.html 안의 Apps Script 주소를 교체해줘.');
+        return;
+      }
+
+      const formData = new FormData(form);
+
+      submitButton.disabled = true;
+      setMessage('등록 요청을 보내는 중이야.');
+
+      try {
+        await fetch(API_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: new URLSearchParams({
+            title: formData.get('title'),
+            category: formData.get('category'),
+            content: formData.get('content')
+          })
+        });
+
+        form.reset();
+
+        setMessage(
+          '등록 요청을 보냈어. 잠시 후 목록을 새로 불러올게.'
+        );
+
+        setTimeout(loadIdeas, 1500);
+
+      } catch (error) {
+        setMessage(
+          '등록 요청 중 문제가 발생했어. Apps Script 배포 상태를 확인해줘.'
+        );
+
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+
+    refreshButton.addEventListener('click', loadIdeas);
+
+    loadIdeas();
+  </script>
+</body>
+</html>
